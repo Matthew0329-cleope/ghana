@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghana 3D Telemedicine Portal</title>
+    <style>
+        :root {
+            --primary-color: #006B3F; /* Ghana flag green */
+            --secondary-color: #FCD116; /* Ghana flag yellow */
+            --accent-color: #CE1126; /* Ghana flag red */
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logo img {
+            max-width: 50px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav ul li {
+            padding: 0 15px;
+        }
+        
+        .nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 107, 63, 0.8), rgba(0, 107, 63, 0.9)), url('/api/placeholder/1200/800') no-repeat center center/cover;
+            height: 60vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 60px 0;
+            background-color: #e9f7ef;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 60px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: rgba(0, 107, 63, 0.1);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-color);
+        }
+        
+        /* 3D Model Showcase */
+        .model-showcase {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .model-display {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .model-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+            
+            .nav ul {
+                margin-bottom: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .step:not(:last-child):after {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="/api/placeholder/50/50" alt="Ghana Telemedicine Logo">
+                </div>
+                <h1>Ghana 3D Telemedicine</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="company.html">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="btn">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforming Healthcare in Ghana Through 3D Telemedicine</h1>
+                <p>Bringing quality healthcare to remote areas with cutting-edge 3D visualization technology</p>
+                <button class="btn">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Features</h2>
+                <p>Innovative solutions for improved healthcare access across Ghana</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">3D</div>
+                    <h3>3D Diagnostic Imaging</h3>
+                    <p>Advanced 3D visualization of medical scans allowing specialists to examine patients remotely with incredible detail and precision.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128241;</div>
+                    <h3>Mobile Accessibility</h3>
+                    <p>Access healthcare services from anywhere in Ghana using our mobile-friendly platform, even in areas with limited connectivity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128172;</div>
+                    <h3>Real-time Consultation</h3>
+                    <p>Connect with healthcare professionals instantly through secure video conferencing with integrated 3D model sharing capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128202;</div>
+                    <h3>Health Data Analytics</h3>
+                    <p>Track health trends and outcomes with powerful analytics tools designed to improve healthcare delivery across communities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128273;</div>
+                    <h3>Secure Platform</h3>
+                    <p>Your medical information is protected with enterprise-grade security and encryption, ensuring privacy and confidentiality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#127973;</div>
+                    <h3>Hospital Integration</h3>
+                    <p>Seamlessly connects with major hospitals and health centers across Ghana for coordinated patient care and referrals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple steps to access quality healthcare through our platform</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Create an account with your basic information and medical history</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Book Appointment</h3>
+                    <p>Schedule a virtual consultation with a healthcare specialist</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Upload Scans</h3>
+                    <p>Submit your medical scans which will be converted to 3D models</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Consult Doctor</h3>
+                    <p>Meet virtually with your doctor who can examine your 3D scans in real-time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Model Showcase -->
+    <section class="model-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>3D Model Technology</h2>
+                <p>Experience our revolutionary 3D medical visualization</p>
+            </div>
+            <div class="model-display">
+                <img src="/api/placeholder/600/350" alt="3D Medical Model Visualization">
+            </div>
+            <div class="model-controls">
+                <button class="control-btn">Rotate</button>
+                <button class="control-btn">Zoom</button>
+                <button class="control-btn">Cross-section</button>
+                <button class="control-btn">Measure</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>Hear from healthcare providers and patients who have benefited from our platform</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The 3D telemedicine platform has revolutionized how we provide care to rural communities. We can now diagnose complex conditions without patients traveling long distances to specialists.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="/api/placeholder/50/50" alt="Dr. Kwame">
+                        </div>
+                        <div class="author-info">
+                            <h4>Dr. Kwame Nkrumah</h4>
+                            <p>Cardiologist, Korle-Bu Teaching Hospital</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>As a patient living in a remote village, access to specialized healthcare was nearly impossible. This platform connected me with a neurologist who diagnosed my condition using 3D imaging of my brain.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="/api/placeholder/50/50" alt="Ama">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ama Serwaa</h4>
+                            <p>Patient from Western Region</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Our community health center now serves as a hub for 3D telemedicine services. We've seen a 70% increase in correct diagnoses and timely treatments since implementing this technology.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="/api/placeholder/50/50" alt="Nurse Abena">
+                        </div>
+                        <div class="author-info">
+                            <h4>Nurse Abena Mensah</h4>
+                            <p>Head Nurse, Tamale Community Health Center</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Have questions? Reach out to our support team</p>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject">
+                            <option value="general">General Inquiry</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="partnership">Partnership Opportunities</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Ghana 3D Telemedicine</h3>
+                    <p>Bridging the healthcare gap across Ghana with innovative 3D telemedicine solutions.</p>
+                    <div class="social-icons">
+                        <div class="social-icon">f</div>
+                        <div class="social-icon">t</div>
+                        <div class="social-icon">in</div>
+                        <div class="social-icon">ig</div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">3D Diagnostics</a></li>
+                        <li><a href="#">Virtual Consultations</a></li>
+                        <li><a href="#">Remote Monitoring</a></li>
+                        <li><a href="#">Emergency Care</a></li>
+                        <li><a href="#">Health Education</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>Accra Medical Center, Ring Road</li>
+                        <li>Accra, Ghana</li>
+                        <li>Phone: +233 20 123 4567</li>
+                        <li>Email: info@ghana3dtelemedicine.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Ghana 3D Telemedicine. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
